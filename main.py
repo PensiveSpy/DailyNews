@@ -1,6 +1,6 @@
 import time
 import requests
-import webbrowser
+import smtplib
 from DailyNews.hello import my_api_key
 from DailyNews.hello import receiver_email
 from DailyNews.hello import sender_email
@@ -12,7 +12,7 @@ def get_news():
     news = requests.get(URL)
     if news.status_code == 200:
         news_data = news.json()
-        articles = news_data.get('articles', [])
+        articles = news_data.get('articles', [])[:20]
         news_list = []
         for article in articles:
             title = article.get('title')
